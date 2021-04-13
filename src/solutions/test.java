@@ -5,8 +5,7 @@ public class test {
         z = x*x + y*y;
     }
     public static void main(String[] args) {
-        int a = 10;
-        fun(6,2,a);
-        System.out.println(a);
+        String[] s = new String[10];
+        System.out.println(s.length);
     }
 }
