@@ -1,11 +1,12 @@
 package musicplayer;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  * 歌曲类
  */
-public class Song {
+public class Song implements Serializable {
     private String id;
     private String name;
     private String singer;

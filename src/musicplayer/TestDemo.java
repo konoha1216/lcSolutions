@@ -1,5 +1,6 @@
 package musicplayer;
 
+import java.io.*;
 import java.util.Scanner;
 
 public class TestDemo {
@@ -112,6 +113,7 @@ public class TestDemo {
         System.out.println("                 5--update a song in one list   ");
         System.out.println("                 6--delete a song in one list   ");
         System.out.println("                 7--display all songs in one list    ");
+        System.out.println("                 8--output the list info to a file   ");
         System.out.println("                 9--back   ");
         System.out.println("*******************************************************");
     }
@@ -300,6 +302,48 @@ public class TestDemo {
                                     System.out.println("***this list does not exist***");break;
                                 }else {
                                     pl4.displayAllSong();
+                                }
+                                break;
+                            case 8:
+                                System.out.println("output the list to a file");
+                                System.out.println("the list name to output:");
+                                String strPlayListName8 = sc.next();
+                                PlayList pl8 = plc.searchPlayListByName(strPlayListName8);
+                                if (pl8==null){
+                                    System.out.println("***this list does not exist***");break;
+                                }else {
+                                    FileOutputStream fos;
+                                    FileInputStream fis;
+                                    try {
+                                        fos = new FileOutputStream(strPlayListName8+".txt");
+                                        ObjectOutputStream oos = new ObjectOutputStream(fos);
+                                        for(Song s:pl8.getMusicList()){
+                                            oos.writeObject(s);
+                                        }
+                                        oos.flush();
+                                        oos.writeObject(null);
+                                        oos.close();
+                                        fos.close();
+                                        System.out.println("output done");
+
+                                        fis = new FileInputStream(strPlayListName8+".txt");
+                                        ObjectInputStream ois = new ObjectInputStream(fis);
+                                        Song song = null;
+                                        while ((song=(Song)ois.readObject()) != null){
+                                            System.out.println(song);
+                                        }
+                                        ois.close();
+                                        fis.close();
+
+                                    } catch (EOFException e){
+                                        System.out.println("read in all info");
+                                    } catch (FileNotFoundException e) {
+                                        e.printStackTrace();
+                                    } catch (IOException e) {
+                                        e.printStackTrace();
+                                    } catch (ClassNotFoundException e) {
+                                        e.printStackTrace();
+                                    }
                                 }
                                 break;
                             default:
