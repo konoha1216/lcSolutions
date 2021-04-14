@@ -12,6 +12,20 @@ public class PlayList {
         musicList = new ArrayList<Song>();
     }
 
+    public String getPlayListName() {
+        return playListName;
+    }
+    public void setPlayListName(String playListName) {
+        this.playListName = playListName;
+    }
+
+    public List<Song> getMusicList() {
+        return musicList;
+    }
+    public void setMusicList(List<Song> musicList) {
+        this.musicList = musicList;
+    }
+
     // add the song to this play list
     public void addToPlayList(Song song){
         // cannot add the repeated song
@@ -70,6 +84,7 @@ public class PlayList {
         Song song1 = searchSongById(id);
         if (song1!=null){
             musicList.remove(song1);
+            System.out.println("delete success!");
         }else {
             System.out.println("***this song with id:"+id+"does not exist***");
         }
